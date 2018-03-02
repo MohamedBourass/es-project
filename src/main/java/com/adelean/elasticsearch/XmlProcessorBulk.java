@@ -14,6 +14,12 @@ import org.elasticsearch.transport.client.PreBuiltTransportClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * The XmlProcessor bulk start the client on the elasticsearch instance.
+ * The method process save the type/data content on the es-project index
+ * 
+ *
+ */
 public class XmlProcessorBulk {
 
 	private static final Logger logger = LoggerFactory.getLogger(XmlProcessorBulk.class);

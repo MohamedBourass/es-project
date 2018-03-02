@@ -98,9 +98,6 @@ public class XmlParser {
 				} else if(file.getName().endsWith(".xml")) {
 					try {
 						logger.info("Start parsing...");
-						if(null != type) {
-							
-						}
 						XmlParser.getInstance().getParser().parse(file, getHandler(type));
 						logger.info("Stop parsing...");
 					} catch (IOException|SAXException e) {
