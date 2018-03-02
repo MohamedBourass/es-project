@@ -2,23 +2,14 @@
   "took": 3,
   "timed_out": false,
   "_shards": {
-    "total": 6,
-    "successful": 6,
+    "total": 5,
+    "successful": 5,
     "failed": 0
   },
   "hits": {
-    "total": 4,
+    "total": 3,
     "max_score": 1,
     "hits": [
-      {
-        "_index": ".kibana",
-        "_type": "config",
-        "_id": "5.0.0",
-        "_score": 1,
-        "_source": {
-          "buildNum": 14438
-        }
-      },
       {
         "_index": "es-project",
         "_type": "product",
