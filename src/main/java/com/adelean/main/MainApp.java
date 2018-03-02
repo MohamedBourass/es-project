@@ -28,7 +28,7 @@ public class MainApp {
 		
 		//Launch the parser
 		logger.info("Start application...");
-		XmlParser.getInstance().parse("src/main/resources/xml.zip");
+		XmlParser.getInstance().parse("src/main/resources/xml.zip", "product"); //file path + type as arguments
 		logger.info("Stop application...");
 	}
 }

@@ -11,6 +11,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.xml.sax.SAXException;
 
+import com.adelean.elasticsearch.XmlProcessorBulk;
+
 /**
  * 
  * This class uses javax.xml.parsers.SAXParser to unzip and parse a XML file 
@@ -26,7 +28,6 @@ public class XmlParser {
 	
 	private SAXParserFactory factory;
 	private SAXParser saxParser;
-	private XmlParserHandler handler;
 	
 	private XmlParser() {
 		init();
@@ -42,15 +43,25 @@ public class XmlParser {
 		} catch (ParserConfigurationException | SAXException e) {
 			logger.error("XMLParser init error", e);
 		}
-		handler = new XmlParserHandler();
 	}
 	
 	public SAXParser getParser() {
 		return saxParser;
 	}
 	
-	public XmlParserHandler getHandler() {
-		return handler;
+	/**
+	 * Either we provide a type to be able to index the xml file
+	 * or we do not provide any type and the file is only parsed 
+	 * without being indexed
+	 * 
+	 * @param type
+	 * @return
+	 */
+	public XmlParserHandler getHandler(String type) {
+		if(null != type) {
+			return new XmlParserHandler(type, new XmlProcessorBulk());
+		}
+		return new XmlParserHandler();
 	}
 	
 	public static synchronized XmlParser getInstance() {
@@ -67,8 +78,9 @@ public class XmlParser {
 	 * If the file is an unexpected format, an error is logged
 	 * 
 	 * @param filename
+	 * @param type
 	 */
-	public void parse(String filename) {
+	public void parse(String filename, String type) {
 		if(null != filename) {
 			File file = null;			
 			file =  new File(filename);
@@ -79,14 +91,17 @@ public class XmlParser {
 						logger.info("Start unzipping...");
 						File unzippedFile = FileUtils.unzipFile(file);
 						logger.info("Stop unzipping...");
-						this.parse(unzippedFile.getAbsolutePath());
+						this.parse(unzippedFile.getAbsolutePath(), type);
 					} catch (IOException e) {
 						logger.error("Unzip file " + file.getName() + " has failed !", e);
 					}
 				} else if(file.getName().endsWith(".xml")) {
 					try {
 						logger.info("Start parsing...");
-						XmlParser.getInstance().getParser().parse(file, getHandler());
+						if(null != type) {
+							
+						}
+						XmlParser.getInstance().getParser().parse(file, getHandler(type));
 						logger.info("Stop parsing...");
 					} catch (IOException|SAXException e) {
 						logger.error("Parse file " + file.getName() + " has failed !", e);
@@ -100,5 +115,9 @@ public class XmlParser {
 		} else {
 			logger.error("Filename is empty !");
 		}
+	}
+	
+	public void parse(String filename) {
+		this.parse(filename, null);
 	}
 }
