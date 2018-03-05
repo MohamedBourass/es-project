@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.adelean</groupId>
 	<artifactId>es-project</artifactId>
-	<version>0.9</version>
+	<version>0.9.1</version>
 	<properties>
 		<junit.version>4.11</junit.version>
 	</properties>
@@ -27,6 +27,17 @@
 				<directory>${project.basedir}/src/test/resources</directory>
 			</testResource>
 		</testResources>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.7.0</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+		</plugins>
 	</build>
 	<dependencies>
 		<!-- Elastic Search -->
