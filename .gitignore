@@ -1,0 +1,7 @@
+/bin/
+/.classpath
+/.project
+/.settings/
+/target/
+/elasticsearch-5.0.0-rc1/
+/kibana-5.0.0-darwin-x86_64/
