@@ -38,7 +38,7 @@
 		</encoder>
 	</appender>
 
-	<logger name="com.adelean" level="${logback.componentlevel}" />
+	<logger name="com.bourass" level="${logback.componentlevel}" />
 	<root level="${logback.rootlevel}">
 		<appender-ref ref="CONSOLE" />
 	</root>
